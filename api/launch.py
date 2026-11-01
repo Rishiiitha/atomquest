@@ -32,8 +32,8 @@ def main() -> None:
     ui_dir = ROOT / "web"
     if not (ui_dir / "node_modules").exists():
         raise SystemExit("Web dependencies are missing; run `make setup` first.")
-    if not shutil.which("pnpm"):
-        raise SystemExit("pnpm is not on PATH; run `scripts\\setup.ps1` to install web dependencies.")
+    if not shutil.which("corepack"):
+        raise SystemExit("Corepack is not on PATH; install Node.js with Corepack enabled.")
 
     api: subprocess.Popen | None = None
     web: subprocess.Popen | None = None
@@ -42,10 +42,13 @@ def main() -> None:
         if os.name == "nt":
             # Run from web/ so cmd.exe never has to parse the workspace path (which may contain spaces).
             web = subprocess.Popen(
-                ["cmd.exe", "/d", "/s", "/c", "pnpm dev --host 127.0.0.1"], cwd=ui_dir
+                ["cmd.exe", "/d", "/s", "/c", "corepack pnpm dev --host 127.0.0.1"],
+                cwd=ui_dir,
             )
         else:
-            web = subprocess.Popen(["pnpm", "dev", "--host", "127.0.0.1"], cwd=ui_dir)
+            web = subprocess.Popen(
+                ["corepack", "pnpm", "dev", "--host", "127.0.0.1"], cwd=ui_dir
+            )
 
         _wait_for_service(api, "FastAPI", 8000, timeout=20)
         _wait_for_service(web, "Vite", 5173, timeout=60)

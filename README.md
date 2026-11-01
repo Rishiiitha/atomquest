@@ -4,10 +4,20 @@
 
 ## Quickstart
 
-1. `make setup` (creates the environment, installs dependencies, and runs the quick pipeline)
-2. `make demo` (starts FastAPI and Vite in Demo-Safe-capable mode)
+Requirements: Git, Python 3.11, and Node.js with Corepack enabled. Corepack selects the pinned pnpm 11.25.0 from `web/package.json`.
 
-On Windows without GNU Make: run `scripts\setup.ps1`, then `scripts\demo.ps1`. To regenerate the full cohorts between setup and demo, run `make reproduce`.
+Clone the shared repository, then run the setup and demo commands:
+
+```powershell
+git clone https://github.com/<owner>/filtertwin.git
+cd filtertwin
+.\scripts\setup.ps1
+.\scripts\demo.ps1
+```
+
+Setup creates `.venv`, installs Python and web dependencies, and runs the quick deterministic pipeline. Demo starts FastAPI and Vite and opens `http://127.0.0.1:5173/twin`. Stop the servers with Ctrl+C. On a system with GNU Make, the equivalent commands are `make setup` and `make demo`.
+
+To regenerate the full cohorts and evidence after setup, run `make reproduce` (or `make full`).
 
 For a short deterministic run: `make quick`. For the requested full cohort and regenerated evidence: `make reproduce` (or `make full`).
 

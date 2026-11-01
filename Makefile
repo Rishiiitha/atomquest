@@ -9,9 +9,9 @@ endif
 setup:
 	python -m venv .venv
 	$(PYTHON) -m pip install -r requirements.txt
-	corepack pnpm --dir web install --node-linker=hoisted --package-import-method=copy
+	cd web && corepack pnpm install --node-linker=hoisted --package-import-method=copy
 	$(PYTHON) scripts/export_openapi.py
-	corepack pnpm --dir web gen:api
+	cd web && corepack pnpm gen:api
 	$(PYTHON) -m data.pipeline --quick
 
 quick:
