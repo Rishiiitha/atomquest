@@ -1,0 +1,716 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FilterTwin API",
+    "description": "Simulator-backed maintenance planning prototype.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/healthz": {
+      "get": {
+        "summary": "Healthz",
+        "operationId": "healthz_healthz_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Healthz Healthz Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scenarios": {
+      "get": {
+        "summary": "Get Scenarios",
+        "operationId": "get_scenarios_scenarios_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ScenarioSummary"
+                  },
+                  "type": "array",
+                  "title": "Response Get Scenarios Scenarios Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/units": {
+      "get": {
+        "summary": "List Units",
+        "operationId": "list_units_units_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array",
+                  "title": "Response List Units Units Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/units/{unit_id}/telemetry": {
+      "get": {
+        "summary": "Telemetry",
+        "operationId": "telemetry_units__unit_id__telemetry_get",
+        "parameters": [
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Unit Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 200,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "title": "Response Telemetry Units  Unit Id  Telemetry Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/units/{unit_id}/health": {
+      "get": {
+        "summary": "Unit Health",
+        "operationId": "unit_health_units__unit_id__health_get",
+        "parameters": [
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Unit Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StageHealth"
+                  },
+                  "title": "Response Unit Health Units  Unit Id  Health Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/simulate": {
+      "post": {
+        "summary": "Simulate",
+        "operationId": "simulate_simulate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Simulate Simulate Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/whatif": {
+      "post": {
+        "summary": "What If",
+        "operationId": "what_if_whatif_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhatIfRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WhatIfResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evidence/metrics": {
+      "get": {
+        "summary": "Evidence Metrics",
+        "operationId": "evidence_metrics_evidence_metrics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Evidence Metrics Evidence Metrics Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evidence/figures": {
+      "get": {
+        "summary": "Evidence Figures",
+        "operationId": "evidence_figures_evidence_figures_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Evidence Figures Evidence Figures Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evidence/provenance": {
+      "get": {
+        "summary": "Evidence Provenance",
+        "operationId": "evidence_provenance_evidence_provenance_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Evidence Provenance Evidence Provenance Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ingest": {
+      "post": {
+        "summary": "Ingest",
+        "operationId": "ingest_ingest_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_ingest_ingest_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngestResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_ingest_ingest_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_ingest_ingest_post"
+      },
+      "EventInput": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "silt_spike",
+              "tanker_tds_switch",
+              "chlorine_breakthrough",
+              "cold_snap",
+              "pump_wear",
+              "usage_change"
+            ],
+            "title": "Kind"
+          },
+          "day": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Day",
+            "default": 30
+          },
+          "duration_days": {
+            "type": "integer",
+            "maximum": 365.0,
+            "minimum": 1.0,
+            "title": "Duration Days",
+            "default": 7
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "title": "EventInput"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "IngestResponse": {
+        "properties": {
+          "accepted_rows": {
+            "type": "integer",
+            "title": "Accepted Rows"
+          },
+          "provenance": {
+            "type": "string",
+            "title": "Provenance"
+          },
+          "stage_estimates": {
+            "items": {
+              "$ref": "#/components/schemas/StageHealth"
+            },
+            "type": "array",
+            "title": "Stage Estimates"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "accepted_rows",
+          "provenance",
+          "stage_estimates",
+          "notes"
+        ],
+        "title": "IngestResponse"
+      },
+      "ScenarioSummary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "tds_mg_l": {
+            "type": "number",
+            "title": "Tds Mg L"
+          },
+          "turbidity_ntu": {
+            "type": "number",
+            "title": "Turbidity Ntu"
+          },
+          "chlorine_mg_l": {
+            "type": "number",
+            "title": "Chlorine Mg L"
+          },
+          "hardness": {
+            "type": "number",
+            "title": "Hardness"
+          },
+          "temp_c": {
+            "type": "number",
+            "title": "Temp C"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "tds_mg_l",
+          "turbidity_ntu",
+          "chlorine_mg_l",
+          "hardness",
+          "temp_c"
+        ],
+        "title": "ScenarioSummary"
+      },
+      "SimulateRequest": {
+        "properties": {
+          "scenario": {
+            "type": "string",
+            "title": "Scenario",
+            "default": "chennai_municipal"
+          },
+          "seed": {
+            "type": "integer",
+            "title": "Seed",
+            "default": 20261101
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/EventInput"
+            },
+            "type": "array",
+            "title": "Events"
+          }
+        },
+        "type": "object",
+        "title": "SimulateRequest"
+      },
+      "StageHealth": {
+        "properties": {
+          "stage": {
+            "type": "string",
+            "title": "Stage"
+          },
+          "health_fraction": {
+            "type": "number",
+            "title": "Health Fraction"
+          },
+          "rul_days": {
+            "type": "number",
+            "title": "Rul Days"
+          },
+          "rul_litres": {
+            "type": "number",
+            "title": "Rul Litres"
+          },
+          "interval_days": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Interval Days"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ],
+            "title": "Confidence"
+          },
+          "cause": {
+            "type": "string",
+            "title": "Cause"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "SIMULATED",
+              "PUBLIC DATA",
+              "BENCH (not yet collected)"
+            ],
+            "title": "Provenance"
+          }
+        },
+        "type": "object",
+        "required": [
+          "stage",
+          "health_fraction",
+          "rul_days",
+          "rul_litres",
+          "interval_days",
+          "confidence",
+          "cause",
+          "explanation",
+          "provenance"
+        ],
+        "title": "StageHealth"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WhatIfRequest": {
+        "properties": {
+          "tds_mg_l": {
+            "type": "number",
+            "maximum": 5000.0,
+            "minimum": 0.0,
+            "title": "Tds Mg L"
+          },
+          "temperature_c": {
+            "type": "number",
+            "maximum": 60.0,
+            "minimum": 0.0,
+            "title": "Temperature C"
+          },
+          "membrane_permeability_lmh_bar": {
+            "type": "number",
+            "maximum": 30.0,
+            "minimum": 0.0,
+            "title": "Membrane Permeability Lmh Bar",
+            "default": 8.0
+          },
+          "pressure_bar": {
+            "type": "number",
+            "maximum": 12.0,
+            "minimum": 0.0,
+            "title": "Pressure Bar",
+            "default": 4.5
+          },
+          "permeate_pressure_bar": {
+            "type": "number",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Permeate Pressure Bar",
+            "default": 0.15
+          },
+          "area_m2": {
+            "type": "number",
+            "maximum": 2.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Area M2",
+            "default": 0.4
+          }
+        },
+        "type": "object",
+        "required": [
+          "tds_mg_l",
+          "temperature_c"
+        ],
+        "title": "WhatIfRequest"
+      },
+      "WhatIfResponse": {
+        "properties": {
+          "provenance": {
+            "type": "string",
+            "title": "Provenance"
+          },
+          "raw_flux_lmh": {
+            "type": "number",
+            "title": "Raw Flux Lmh"
+          },
+          "raw_flow_l_h": {
+            "type": "number",
+            "title": "Raw Flow L H"
+          },
+          "osmotic_pressure_bar": {
+            "type": "number",
+            "title": "Osmotic Pressure Bar"
+          },
+          "net_driving_pressure_bar": {
+            "type": "number",
+            "title": "Net Driving Pressure Bar"
+          },
+          "normalized_permeability_lmh_bar": {
+            "type": "number",
+            "title": "Normalized Permeability Lmh Bar"
+          },
+          "normalized_health_fraction": {
+            "type": "number",
+            "title": "Normalized Health Fraction"
+          },
+          "temperature_corrected": {
+            "type": "boolean",
+            "title": "Temperature Corrected"
+          }
+        },
+        "type": "object",
+        "required": [
+          "provenance",
+          "raw_flux_lmh",
+          "raw_flow_l_h",
+          "osmotic_pressure_bar",
+          "net_driving_pressure_bar",
+          "normalized_permeability_lmh_bar",
+          "normalized_health_fraction",
+          "temperature_corrected"
+        ],
+        "title": "WhatIfResponse"
+      }
+    }
+  }
+}

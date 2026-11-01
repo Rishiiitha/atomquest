@@ -1,0 +1,25 @@
+telemetry_tiers:
+  A: [outlet_tds_mg_l, pump_runtime_h, litres_dispensed_l, motor_current_a, rpm]
+  B: [outlet_tds_mg_l, pump_runtime_h, litres_dispensed_l, motor_current_a, rpm, inlet_tds_mg_l, flow_l_h, temp_c]
+  C: [outlet_tds_mg_l, pump_runtime_h, litres_dispensed_l, motor_current_a, rpm, inlet_tds_mg_l, flow_l_h, temp_c, turbidity_ntu]
+noise:
+  tds_sigma_mg_l: {value: 12, range: [0, 100], evidence: assumption}
+  flow_relative_sigma: {value: 0.025, range: [0, 0.2], evidence: assumption}
+  current_sigma_a: {value: 0.025, range: [0, 0.2], evidence: assumption}
+  temp_sigma_c: {value: 0.3, range: [0, 2], evidence: assumption}
+simulation_noise:
+  current_measurement_sigma_a: {value: 0.025, range: [0, 0.2], evidence: assumption}
+  outlet_tds_sigma_mg_l: {value: 12, range: [0, 100], evidence: assumption}
+  flow_relative_sigma: {value: 0.025, range: [0, 0.2], evidence: assumption}
+  rpm_sigma: {value: 4, range: [0, 30], evidence: assumption}
+  ripple_noise_sigma_a: {value: 0.008, range: [0, 0.1], evidence: assumption}
+  current_bias_sigma_a: {value: 0.04, range: [0, 0.2], evidence: assumption}
+  current_drift_mean_a_per_day: {value: 0.0005, range: [0, 0.005], evidence: assumption}
+  current_drift_sigma_a_per_day: {value: 0.0004, range: [0, 0.005], evidence: assumption}
+  rpm_base: {value: 2800, range: [1800, 3600], evidence: assumption}
+  current_wear_noise_sigma_a: {value: 0.025, range: [0.0, 0.2], evidence: assumption}
+  temperature_base_sigma_c: {value: 0.5, range: [0.0, 2.0], evidence: assumption}
+  temperature_reading_sigma_c: {value: 0.3, range: [0.0, 2.0], evidence: assumption}
+  tds_process_sigma_mg_l: {value: 15, range: [0.0, 100.0], evidence: assumption}
+  turbidity_process_sigma_ntu: {value: 0.6, range: [0.0, 10.0], evidence: assumption}
+  ripple_additive_noise_sigma_a: {value: 0.008, range: [0.0, 0.1], evidence: assumption}

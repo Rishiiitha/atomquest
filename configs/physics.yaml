@@ -1,0 +1,122 @@
+# Units/ranges describe the configured model's plausible operating envelope.
+ro:
+  area_m2: {value: 0.4, range: [0.2, 0.8], evidence: literature-typical}
+  permeability_lmh_bar: {value: 8.0, range: [3.0, 15.0], evidence: to-calibrate-on-bench}
+  salt_passage_lmh: {value: 1.3, range: [0.2, 5.0], evidence: to-calibrate-on-bench}
+  osmotic_bar_per_g_l: {value: 0.7, range: [0.5, 0.9], evidence: assumption}
+  cp_factor: {value: 1.2, range: [1.0, 1.6], evidence: assumption}
+  temp_coefficient_per_c: {value: 0.0239, range: [0.015, 0.03], evidence: literature-typical}
+  nominal_pressure_bar: {value: 4.5, range: [2.0, 8.0], evidence: assumption}
+  pump_area_l_h: {value: 45.0, range: [20.0, 90.0], evidence: to-calibrate-on-bench}
+  pump_slip_per_bar: {value: 0.008, range: [0.0, 0.05], evidence: to-calibrate-on-bench}
+  reject_coefficient_l_h_sqrt_bar: {value: 13.0, range: [7.0, 20.0], evidence: to-calibrate-on-bench}
+  permeate_backpressure_bar: {value: 0.15, range: [0.0, 1.5], evidence: assumption}
+  max_operating_pressure_bar: {value: 8.0, range: [4.0, 12.0], evidence: assumption}
+  golden_fouled_permeability_fraction: {value: 0.7, range: [0.4, 0.9], evidence: assumption}
+pump:
+  current_intercept_a: {value: 0.35, range: [0.1, 0.8], evidence: to-calibrate-on-bench}
+  current_slope_a_bar: {value: 0.22, range: [0.08, 0.4], evidence: to-calibrate-on-bench}
+  suction_cutoff_bar: {value: 0.15, range: [0.05, 0.5], evidence: to-calibrate-on-bench}
+  rpm: {value: 2800, range: [1800, 3600], evidence: assumption}
+  starvation_recovery_span_bar: {value: 0.8, range: [0.2, 2.0], evidence: assumption}
+  minimum_starvation_flow_fraction: {value: 0.2, range: [0.05, 0.5], evidence: assumption}
+  maximum_wear_fraction: {value: 0.8, range: [0.3, 1.0], evidence: assumption}
+  current_wear_increment_a: {value: 0.25, range: [0.0, 1.0], evidence: assumption}
+  rpm_wear_fraction: {value: 0.3, range: [0.0, 1.0], evidence: assumption}
+  daily_hours: {value: 24, range: [18, 24], evidence: assumption}
+  max_runtime_hours_per_day: {value: 24, range: [8, 24], evidence: assumption}
+  max_fill_time_h: {value: 8, range: [1, 24], evidence: assumption}
+tank:
+  usable_storage_l: {value: 20, range: [5, 30], evidence: assumption}
+  nominal_permeate_pressure_bar: {value: 0.15, range: [0.0, 1.5], evidence: assumption}
+filtration:
+  sediment_area_m2: {value: 0.02, range: [0.005, 0.1], evidence: assumption}
+  membrane_resistance_per_m: {value: 1.0e10, range: [1.0e9, 1.0e12], evidence: assumption}
+  viscosity_pa_s_25c: {value: 8.9e-4, range: [7.0e-4, 1.5e-3], evidence: literature-typical}
+carbon:
+  nominal_exposure_capacity_mg: {value: 4000, range: [1000, 12000], evidence: assumption}
+  assumed_chlorine_mg_l: {value: 0.3, range: [0.05, 1.5], evidence: assumption}
+  logistic_steepness_per_capacity: {value: 22, range: [5, 50], evidence: assumption}
+degradation:
+  sediment_daily_base: {value: 0.0015, range: [0.0002, 0.01], evidence: assumption}
+  uf_daily_base: {value: 0.001, range: [0.0001, 0.008], evidence: assumption}
+  ro_fouling_daily_base: {value: 0.00045, range: [0.00005, 0.004], evidence: assumption}
+  ro_scaling_daily_base: {value: 0.00018, range: [0.00001, 0.002], evidence: assumption}
+filters:
+  sediment_reference_resistance_per_m: {value: 1.0e10, range: [1.0e9, 1.0e12], evidence: assumption}
+  sediment_cake_multiplier_at_reference: {value: 9, range: [1, 30], evidence: assumption}
+  sediment_area_m2: {value: 0.02, range: [0.005, 0.1], evidence: assumption}
+  uf_reference_resistance_per_m: {value: 6.0e9, range: [1.0e9, 1.0e12], evidence: assumption}
+  uf_cake_multiplier_at_reference: {value: 8, range: [1, 30], evidence: assumption}
+  uf_area_m2: {value: 0.035, range: [0.005, 0.1], evidence: assumption}
+  uf_relative_pressure_factor: {value: 0.35, range: [0.1, 1.0], evidence: assumption}
+  eol_cake_health_loss: {value: 0.45, range: [0.2, 0.7], evidence: assumption}
+  sediment_shock_health_loss_per_day: {value: 0.008, range: [0.001, 0.05], evidence: assumption}
+ro_degradation:
+  fouling_loss_at_reference: {value: 0.35, range: [0.1, 0.6], evidence: assumption}
+  maximum_fouling_loss_fraction: {value: 0.5, range: [0.2, 0.8], evidence: assumption}
+  turbidity_fouling_multiplier: {value: 0.05, range: [0.0, 0.2], evidence: assumption}
+  scaling_loss_multiplier: {value: 0.05, range: [0.0, 0.2], evidence: assumption}
+  minimum_permeability_lmh_bar: {value: 1.2, range: [0.2, 5.0], evidence: assumption}
+  oxidation_salt_passage_multiplier: {value: 0.7, range: [0.0, 2.0], evidence: assumption}
+  scaling_salt_passage_multiplier: {value: 0.0, range: [0.0, 1.0], evidence: assumption}
+calibration_sweep:
+  pressure_bar_min: {value: 3.2, range: [2.0, 5.0], evidence: assumption}
+  pressure_bar_max: {value: 6.2, range: [5.0, 8.0], evidence: assumption}
+  points: {value: 24, range: [8, 100], evidence: assumption}
+  feed_tds_mg_l: {value: 600, range: [100, 2500], evidence: assumption}
+  temperature_c: {value: 25, range: [10, 40], evidence: assumption}
+  cold_comparison_temperature_c: {value: 15, range: [5, 25], evidence: assumption}
+  current_noise_sigma_a: {value: 0.003, range: [0.0, 0.05], evidence: assumption}
+  pressure_noise_sigma_bar: {value: 0.005, range: [0.0, 0.05], evidence: assumption}
+  flux_noise_sigma_lmh: {value: 0.03, range: [0.0, 1.0], evidence: assumption}
+  permeate_tds_noise_sigma_mg_l: {value: 0.15, range: [0.0, 5.0], evidence: assumption}
+darcy_golden:
+  flow_l_min: {value: 1.0, range: [0.1, 10.0], evidence: assumption}
+  area_m2: {value: 0.02, range: [0.005, 0.1], evidence: assumption}
+  viscosity_pa_s: {value: 0.00089, range: [0.0007, 0.0015], evidence: assumption}
+  clean_resistance_per_m: {value: 1.0e10, range: [1.0e9, 1.0e12], evidence: assumption}
+  caked_resistance_per_m: {value: 6.0e10, range: [1.0e10, 1.0e12], evidence: assumption}
+salt_balance_golden:
+  feed_l_h: {value: 40, range: [1, 100], evidence: assumption}
+  permeate_l_h: {value: 12, range: [1, 50], evidence: assumption}
+  recovery_fraction: {value: 0.3, range: [0.05, 0.8], evidence: assumption}
+simulation:
+  household_min: {value: 2, range: [1, 12], evidence: assumption}
+  household_max: {value: 8, range: [2, 12], evidence: assumption}
+  litres_per_person_day: {value: 2.6, range: [1.0, 6.0], evidence: assumption}
+  trajectory_extension_factor: {value: 1.35, range: [1.1, 2.0], evidence: assumption}
+  season_period_days: {value: 365, range: [300, 400], evidence: assumption}
+  seasonal_temperature_amplitude_c: {value: 4.0, range: [0.0, 10.0], evidence: assumption}
+  seasonal_tds_amplitude_fraction: {value: 0.035, range: [0.0, 0.2], evidence: assumption}
+  temperature_noise_sigma_c: {value: 0.5, range: [0.0, 2.0], evidence: assumption}
+  tds_noise_sigma_mg_l: {value: 15, range: [0.0, 100.0], evidence: assumption}
+  turbidity_noise_sigma_ntu: {value: 0.6, range: [0.0, 10.0], evidence: assumption}
+  weekend_demand_multiplier: {value: 1.25, range: [1.0, 2.0], evidence: assumption}
+  daily_demand_log_sigma: {value: 0.16, range: [0.0, 0.5], evidence: assumption}
+  holiday_probability_per_day: {value: 0.025, range: [0.0, 0.2], evidence: assumption}
+  holiday_demand_multiplier: {value: 0.1, range: [0.0, 0.5], evidence: assumption}
+  ro_damage_fraction_reference: {value: 0.4, range: [0.1, 0.7], evidence: assumption}
+  life_lognormal_sigma: {value: 0.16, range: [0.0, 0.5], evidence: assumption}
+  life_days_min: {value: 120, range: [30, 365], evidence: assumption}
+  life_days_max: {value: 620, range: [365, 1000], evidence: assumption}
+  reference_turbidity_ntu: {value: 5, range: [1, 20], evidence: assumption}
+  reference_chlorine_mg_l: {value: 0.5, range: [0.05, 2.0], evidence: assumption}
+  reference_ro_stress: {value: 0.5, range: [0.1, 2.0], evidence: assumption}
+  event_outlier_day_fraction: {value: 0.55, range: [0.0, 1.0], evidence: assumption}
+  air_ingress_start_fraction: {value: 0.4, range: [0.0, 1.0], evidence: assumption}
+  voltage_sag_fraction: {value: 0.88, range: [0.5, 1.0], evidence: assumption}
+  air_ingress_current_ripple_a: {value: 0.12, range: [0.0, 0.5], evidence: assumption}
+  air_ingress_flow_fraction: {value: 0.82, range: [0.3, 1.0], evidence: assumption}
+  ood_inlet_pressure_bar: {value: [0.7, 1.8], range: [0.2, 3.0], evidence: assumption}
+  ood_flow_scale: {value: [0.82, 1.12], range: [0.5, 1.5], evidence: assumption}
+  ood_pump_wear_fraction: {value: [0.05, 0.25], range: [0.0, 0.6], evidence: assumption}
+  ood_pump_wear_extra_fraction: {value: 0.18, range: [0.0, 0.6], evidence: assumption}
+  sediment_shock_increment_per_day: {value: 0.008, range: [0.0, 0.05], evidence: assumption}
+  sediment_health_floor: {value: 0.05, range: [0.0, 0.3], evidence: assumption}
+  uf_health_floor: {value: 0.05, range: [0.0, 0.3], evidence: assumption}
+  ro_base_ripple_a: {value: 0.025, range: [0.0, 0.2], evidence: assumption}
+  ripple_starvation_gain_a: {value: 0.25, range: [0.0, 1.0], evidence: assumption}
+  ripple_wear_gain_a: {value: 0.08, range: [0.0, 0.5], evidence: assumption}
+  turbidity_seasonal_amplitude_fraction: {value: 0.2, range: [0.0, 1.0], evidence: assumption}
+  chlorine_measurement_noise_fraction: {value: 0.04, range: [0.0, 0.5], evidence: assumption}

@@ -1,0 +1,1 @@
+"""Bench rig data adapter."""

@@ -1,0 +1,10 @@
+seed: 20261101
+estimator:
+  conformal_coverage: 0.9
+  max_training_samples: 120000
+  residual_model: HistGradientBoostingRegressor
+  validation_warning_false_alarm_budget_per_unit_year: 0.25
+  business_replacement_fraction: 0.82
+cohorts:
+  quick: {train_units: 48, validation_units: 12, test_units: 12, ood_units: 12}
+  full: {train_units: 1500, validation_units: 300, test_units: 300, ood_units: 300}

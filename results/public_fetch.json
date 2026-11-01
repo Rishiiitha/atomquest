@@ -1,0 +1,33 @@
+{
+  "checked_on": "2026-11-01",
+  "results": {
+    "NASA_CMAPSS_catalog": {
+      "url": "https://catalog.data.gov/dataset/c-mapss-aircraft-engine-simulator-data",
+      "status": "unavailable in this run",
+      "error": "<urlopen error [Errno 11001] getaddrinfo failed>",
+      "license": "not verified",
+      "downloaded": false
+    },
+    "NASA_CMAPSS_archive": {
+      "url": "https://phm-datasets.s3.amazonaws.com/NASA/6.+Turbofan+Engine+Degradation+Simulation+Data+Set.zip",
+      "status": "unavailable in this run",
+      "error": "<urlopen error [Errno 11001] getaddrinfo failed>",
+      "license": "not verified",
+      "downloaded": false
+    },
+    "CGWB_quality_catalog": {
+      "url": "https://www.nwdp.nwic.gov.in/dataset/ground-water-quality-manual-chemical-parameters-cgwb-f-gfg",
+      "status": "unavailable in this run",
+      "error": "<urlopen error [Errno 11001] getaddrinfo failed>",
+      "license": "not verified",
+      "downloaded": false
+    },
+    "RO_fouling_candidate": {
+      "url": "https://www.mdpi.com/2673-4117/6/5/98",
+      "status": "unavailable in this run",
+      "error": "<urlopen error [Errno 11001] getaddrinfo failed>",
+      "license": "not verified",
+      "downloaded": false
+    }
+  }
+}

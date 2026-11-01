@@ -1,0 +1,20 @@
+scenarios:
+  chennai_municipal: {tds_mg_l: 450, turbidity_ntu: 2, chlorine_mg_l: 0.5, hardness: 0.35, temp_c: 28}
+  delhi_borewell: {tds_mg_l: 1250, turbidity_ntu: 8, chlorine_mg_l: 0.05, hardness: 0.8, temp_c: 25}
+  monsoon_silt: {tds_mg_l: 650, turbidity_ntu: 35, chlorine_mg_l: 0.2, hardness: 0.45, temp_c: 27}
+  tanker_switching: {tds_mg_l: 900, turbidity_ntu: 10, chlorine_mg_l: 0.1, hardness: 0.65, temp_c: 26}
+  winter_north: {tds_mg_l: 700, turbidity_ntu: 3, chlorine_mg_l: 0.3, hardness: 0.5, temp_c: 15}
+  hard_water_scaling: {tds_mg_l: 1450, turbidity_ntu: 4, chlorine_mg_l: 0.2, hardness: 0.9, temp_c: 25}
+  chlorine_heavy: {tds_mg_l: 500, turbidity_ntu: 3, chlorine_mg_l: 1.2, hardness: 0.4, temp_c: 27}
+  irregular_usage: {tds_mg_l: 720, turbidity_ntu: 5, chlorine_mg_l: 0.25, hardness: 0.55, temp_c: 24}
+event_defaults:
+  silt_spike: {value: 45, units: NTU, duration_days: 7}
+  tanker_tds_switch: {value: 1450, units: mg/L, duration_days: 30}
+  chlorine_breakthrough: {value: 1.1, units: mg/L, duration_days: 30}
+  cold_snap: {value: 12, units: degC, duration_days: 14}
+  pump_wear: {value: 0.15, units: fraction, duration_days: 90}
+  usage_change: {value: 1.5, units: multiplier, duration_days: 30}
+seasonal_events:
+  monsoon_silt: {period_days: 97, start_day: 10, duration_days: 8, turbidity_min_ntu: 20, turbidity_max_ntu: 80}
+  tanker_switching: {life_fraction: 0.35, tds_multiplier: 1.45, minimum_turbidity_ntu: 9}
+  hard_water_scaling: {period_days: 120, duration_days: 8, tds_min_mg_l: 1600, tds_max_mg_l: 2350}

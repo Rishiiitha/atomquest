@@ -1,0 +1,15 @@
+end_of_life:
+  sediment_health: {value: 0.55, range: [0.3, 0.8], evidence: assumption}
+  uf_health: {value: 0.55, range: [0.3, 0.8], evidence: assumption}
+  carbon_breakthrough_ratio: {value: 0.1, range: [0.02, 0.3], evidence: assumption}
+  ro_permeability_fraction: {value: 0.6, range: [0.4, 0.8], evidence: assumption}
+  ro_rejection_fraction: {value: 0.85, range: [0.7, 0.95], evidence: assumption}
+  uv_intensity_fraction: {value: 0.7, range: [0.5, 0.9], evidence: assumption}
+  alkaliser_capacity_fraction: {value: 0.1, range: [0.02, 0.3], evidence: assumption}
+nominal_life_days:
+  sediment: {value: 300, range: [120, 620], evidence: assumption}
+  uf: {value: 340, range: [120, 620], evidence: assumption}
+  carbon: {value: 365, range: [120, 620], evidence: assumption}
+  ro: {value: 390, range: [120, 620], evidence: assumption}
+  uv: {value: 440, range: [120, 620], evidence: assumption}
+  alkaliser: {value: 420, range: [120, 620], evidence: assumption}
