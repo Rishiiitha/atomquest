@@ -52,6 +52,7 @@ FilterTwin has 2,299 fewer replacements and 1,777 more failures than the fixed s
 | External NASA/RO/water-quality dataset acquisition and validation | Not available in this run; no external values ingested |
 | Physical bench calibration, run-to-failure data, and real-device accuracy | Not run; hardware kit is a proposal and fixtures are synthetic |
 | Live FastAPI HTTP routes and WebSocket stream controls | Passed locally: GET health/scenarios/evidence; POST simulate/what-if/ingest; WebSocket pause/seek/resume/event injection |
+| Demo launcher from the spaced workspace path | Passed with installed dependencies: FastAPI and Vite both listened successfully |
 | Browser-to-live-API integration and clean-clone `setup` → `demo` smoke test | Not verified in this managed Windows runtime |
 | B2 sequence model, trained cause-attribution classifier, requested normalization/coupling ablations, SHAP, ONNX | Cut; see [DECISIONS.md](DECISIONS.md) |
 | 60 fps on integrated GPU, native WebGL rendering, Lighthouse ≥90 | Not measured; headless Chromium verified the 2D recovery path only |
