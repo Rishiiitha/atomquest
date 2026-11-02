@@ -4,29 +4,19 @@
 
 ## Quickstart
 
-Requirements: Git, Python 3.11, and Node.js with Corepack enabled. Corepack selects the pinned pnpm 11.25.0 from `web/package.json`.
+1. `make setup` (creates the environment, installs dependencies, and runs the quick pipeline)
+2. `make demo` (starts FastAPI and Vite in Demo-Safe-capable mode)
 
-Clone the shared repository, then run the setup and demo commands:
-
-```powershell
-git clone https://github.com/<owner>/filtertwin.git
-cd filtertwin
-.\scripts\setup.ps1
-.\scripts\demo.ps1
-```
-
-Setup creates `.venv`, installs Python and web dependencies, and runs the quick deterministic pipeline. Demo starts FastAPI and Vite and opens `http://127.0.0.1:5173/twin`. Stop the servers with Ctrl+C. On a system with GNU Make, the equivalent commands are `make setup` and `make demo`.
-
-To regenerate the full cohorts and evidence after setup, run `make reproduce` (or `make full`).
+On Windows without GNU Make: run `scripts\setup.ps1`, then `scripts\demo.ps1`. To regenerate the full cohorts between setup and demo, run `make reproduce`.
 
 For a short deterministic run: `make quick`. For the requested full cohort and regenerated evidence: `make reproduce` (or `make full`).
 
 ## Current generated run
 
-- Units: {"ood": 300, "test": 300, "train": 1500, "validation": 300}
-- Rows: {"ood": 250698, "test": 250955, "train": 1254008, "validation": 251007}
+- Units: {"ood": 12, "test": 12, "train": 48, "validation": 12}
+- Rows: {"ood": 10011, "test": 10042, "train": 40157, "validation": 10056}
 - Grouped split check: True
-- Pipeline wall time: 1127.36s on CPU
+- Pipeline wall time: 89.53s on CPU
 - Provenance: SIMULATED. External validation and bench data are pending.
 
 ## What it demonstrates

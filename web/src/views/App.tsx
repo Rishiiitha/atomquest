@@ -87,7 +87,16 @@ function TwinPage() {
   const { scenario, setScenario, unitId, setUnitId } = useStore()
   const scenarios = useQuery({ queryKey: ['scenarios'], queryFn: getScenarios })
   const units = useQuery({ queryKey: ['units'], queryFn: getUnits })
-  useEffect(() => { if (!unitId && units.data?.[0]) setUnitId(units.data[0].unit_id) }, [unitId, units.data, setUnitId])
+  useEffect(() => {
+    if (!units.data?.length) return
+    if (!unitId) {
+      const match = units.data.find((u) => u.scenario === scenario) || units.data[0]
+      setUnitId(match.unit_id)
+      if (match.scenario && match.scenario !== scenario) {
+        setScenario(match.scenario)
+      }
+    }
+  }, [unitId, units.data, scenario, setUnitId, setScenario])
   const telemetry = useQuery({ queryKey: ['telemetry', unitId], queryFn: () => getTelemetry(unitId), enabled: !!unitId })
   const healthResult = useQuery({ queryKey: ['health', unitId], queryFn: () => getHealth(unitId), enabled: !!unitId })
   const metricsResult = useQuery({ queryKey: ['metrics'], queryFn: getMetrics })
@@ -143,7 +152,16 @@ function TwinPage() {
       <aside className="control-rail">
         <Panel eyebrow="Water profile" title="Scenario">
           <label className="field-label" htmlFor="scenario">Feed-water scenario</label>
-          <div className="select-wrap"><select id="scenario" value={scenario} onChange={(e) => { setScenario(e.target.value); setLocalReadings(null) }}>
+          <div className="select-wrap"><select id="scenario" value={scenario} onChange={(e) => {
+            const next = e.target.value
+            setScenario(next)
+            setLocalReadings(null)
+            setEventMessage('')
+            const match = units.data?.find((u) => u.scenario === next)
+            if (match) {
+              setUnitId(match.unit_id)
+            }
+          }}>
             {(scenarios.data?.length ? scenarios.data : [{ id: current?.scenario || scenario, tds_mg_l: 0, turbidity_ntu: 0, chlorine_mg_l: 0, hardness: 0, temp_c: 0 }]).map((option) => <option key={option.id} value={option.id}>{option.id.replaceAll('_', ' ')}</option>)}
           </select><ChevronDown size={15} /></div>
           <div className="scenario-readout"><span>Feed TDS <b>{number(current?.tds_in_mg_l, 0)} <small>mg/L</small></b></span><span>Turbidity <b>{number(current?.turbidity_ntu, 1)} <small>NTU</small></b></span></div>
