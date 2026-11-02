@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
   color: #e6edf1;
   background: #0b1118;
@@ -21,6 +22,7 @@
 }
 
 :root[data-theme='light'] {
+  color-scheme: light;
   color: #14222b;
   background: #f0f5f5;
   --bg: #f0f5f5;
@@ -42,6 +44,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; background: var(--bg); color: var(--text); transition: background .2s ease, color .2s ease; }
 button, input, select { font: inherit; }
+select option { background-color: var(--surface-2); color: var(--text); }
 button, a, select, input[type='range'] { -webkit-tap-highlight-color: transparent; }
 button { color: inherit; }
 a { color: inherit; text-decoration: none; }
@@ -137,7 +140,19 @@ main { width: 100%; max-width: 1680px; flex: 1; margin: 0 auto; padding: 34px cl
 .timeline-controls input[type='range'] { flex: 1; min-width: 35px; }
 input[type='range'] { accent-color: var(--aqua); height: 4px; cursor: pointer; }
 .speed-control { color: var(--muted); font-size: 8px; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
-.speed-control select { border: 0; color: var(--aqua); background: transparent; font: 500 9px 'JetBrains Mono', monospace; }
+.speed-control select {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--aqua);
+  background: var(--surface-2);
+  font: 500 9px 'JetBrains Mono', monospace;
+  padding: 3px 6px;
+  cursor: pointer;
+}
+.speed-control select option {
+  background-color: var(--surface-2);
+  color: var(--text);
+}
 .timeline-track { display: flex; align-items: center; gap: 10px; color: var(--muted-2); font: 8px 'JetBrains Mono', monospace; margin: 8px 1px 0; }
 .track-line { background: var(--surface-3); height: 2px; flex: 1; position: relative; }
 .track-line i { width: 8px; height: 8px; border-radius: 50%; background: var(--aqua); box-shadow: 0 0 10px var(--aqua); position: absolute; top: -3px; transform: translateX(-50%); }
