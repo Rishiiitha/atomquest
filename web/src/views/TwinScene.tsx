@@ -94,9 +94,11 @@ class SceneErrorBoundary extends Component<{ children: ReactNode; fallback: Reac
   render() { return this.state.failed ? this.props.fallback : this.props.children }
 }
 
-export function TwinScene({ flow, current, selected, preset, onSelect, fallback }: { flow: number; current: number; selected: string; preset: string; onSelect: (id: string) => void; fallback: ReactNode }) {
+export function TwinScene({ flow, current, selected, preset, onSelect, fallback, force3d = false }: { flow: number; current: number; selected: string; preset: string; onSelect: (id: string) => void; fallback: ReactNode; force3d?: boolean }) {
   const [reduced, setReduced] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  const [userForce3d, setUserForce3d] = useState(false)
   const [webgl, setWebgl] = useState(true)
+  const [webglError, setWebglError] = useState(false)
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)')
     setReduced(query.matches)
@@ -108,12 +110,29 @@ export function TwinScene({ flow, current, selected, preset, onSelect, fallback 
     } catch { setWebgl(false) }
     return () => query.removeEventListener('change', change)
   }, [])
-  if (reduced || !webgl) return <>{fallback}</>
+  const allow3d = force3d || userForce3d || !reduced
+  if (!webgl || webglError) {
+    return <div className="schematic-wrapper">
+      <div className="three-fallback-notice">
+        <span>WebGL is unavailable or graphics acceleration is disabled in your browser.</span>
+      </div>
+      {fallback}
+    </div>
+  }
+  if (!allow3d) {
+    return <div className="schematic-wrapper">
+      <div className="three-fallback-notice">
+        <span>Reduced motion active in system settings.</span>
+        <button type="button" className="enable-3d-btn" onClick={() => setUserForce3d(true)}>Switch to 3D</button>
+      </div>
+      {fallback}
+    </div>
+  }
   return <div className="three-stage" aria-label="Interactive procedural 3D purifier twin" role="img">
     <SceneErrorBoundary fallback={fallback}><Canvas camera={{ position: [0, 2.1, 7.8], fov: 38 }} dpr={[1, 1.3]} gl={{ antialias: true, powerPreference: 'low-power' }} onCreated={({ gl }) => {
       gl.domElement.addEventListener('webglcontextlost', (event) => {
         event.preventDefault()
-        setWebgl(false)
+        setWebglError(true)
       }, { once: true })
     }}><TwinModel flow={flow} current={current} selected={selected} preset={preset} onSelect={onSelect} /></Canvas></SceneErrorBoundary>
     <div className="three-hint">Drag to orbit <span>·</span> Scroll to zoom</div>

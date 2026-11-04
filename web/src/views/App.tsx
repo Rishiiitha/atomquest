@@ -105,6 +105,7 @@ function TwinPage() {
   const [speed, setSpeed] = useState(24)
   const [stage, setStage] = useState('ro')
   const [preset, setPreset] = useState<'overview' | 'exploded' | 'xray'>('overview')
+  const [viewMode, setViewMode] = useState<'3d' | '2d'>('3d')
   const [eventMessage, setEventMessage] = useState('')
   const [localReadings, setLocalReadings] = useState<Reading[] | null>(null)
   const rows = localReadings || telemetry.data?.readings || []
@@ -180,10 +181,19 @@ function TwinPage() {
         </Panel>
       </aside>
       <div className="twin-main">
-        <Panel className="scene-panel" eyebrow="Procedural hardware / configurable topology" title="Treatment path" action={<div className="scene-modes">{(['overview', 'exploded', 'xray'] as const).map((mode) => <button key={mode} onClick={() => setPreset(mode)} className={preset === mode ? 'active' : ''}>{mode}</button>)}</div>}>
-          <Suspense fallback={<FallbackSchematic current={current} />}>
-            <TwinScene flow={current?.flow_l_h || 0} current={current?.motor_current_a || 0} selected={stage} preset={preset} onSelect={setStage} fallback={<FallbackSchematic current={current} />} />
-          </Suspense>
+        <Panel className="scene-panel" eyebrow="Procedural hardware / configurable topology" title="Treatment path" action={<div className="scene-modes">
+          <button onClick={() => setViewMode('3d')} className={viewMode === '3d' ? 'active' : ''}>3D</button>
+          <button onClick={() => setViewMode('2d')} className={viewMode === '2d' ? 'active' : ''}>2D</button>
+          <span className="mode-sep" />
+          {(['overview', 'exploded', 'xray'] as const).map((mode) => <button key={mode} onClick={() => setPreset(mode)} className={preset === mode ? 'active' : ''}>{mode}</button>)}
+        </div>}>
+          {viewMode === '2d' ? (
+            <FallbackSchematic current={current} />
+          ) : (
+            <Suspense fallback={<FallbackSchematic current={current} />}>
+              <TwinScene flow={current?.flow_l_h || 0} current={current?.motor_current_a || 0} selected={stage} preset={preset} onSelect={setStage} force3d={viewMode === '3d'} fallback={<FallbackSchematic current={current} />} />
+            </Suspense>
+          )}
           <div className="scene-footer"><span><i className="dot aqua" /> Feed → prefilter → RO → post-treatment → tank</span><span><Provenance /></span></div>
         </Panel>
         <div className="timeline panel">
